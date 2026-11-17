@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: perfume_mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: perfume_shop
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - perfume_network
+
+  app:
+    build: .
+    container_name: perfume_app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: 3000
+      MONGO_URI: mongodb://mongodb:27017/perfume_shop
+      JWT_SECRET: change_this_to_a_long_random_string_in_production
+      LOW_STOCK_LEVEL: 5
+    depends_on:
+      - mongodb
+    volumes:
+      - ./public/uploads:/app/public/uploads
+    networks:
+      - perfume_network
+
+volumes:
+  mongodb_data:
+
+networks:
+  perfume_network:

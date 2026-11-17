@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!--
+  File name : public/catalogue.html
+  Purpose   : The PUBLIC shop window. Anyone can browse it without logging in.
+              It shows only the perfumes that are in stock and lets a visitor
+              send a WhatsApp message about a perfume they like.
+  Connects  : Loads css/style.css plus js/api.js and js/ui.js for the helpers.
+              Its own logic lives in js/catalogue.js, which calls the public
+              GET /api/products/public endpoint.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Our Perfumes | Cathy Luxe Collections</title>
+
+  <!-- ===== Stylesheets (Bootstrap + Bootstrap Icons + Google Fonts + theme) ===== -->
+  <link href="vendor/bootstrap.min.css" rel="stylesheet" />
+  <link href="vendor/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="vendor/fonts.css" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===== PUBLIC NAVBAR (no dashboard links, just a staff login shortcut) ===== -->
+  <nav class="navbar navbar-expand-lg app-navbar sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="catalogue.html">
+        <span class="brand-mark"><i class="bi bi-flower1"></i></span>
+        <span>
+          <span class="brand-name d-block">Cathy Luxe Collections</span>
+          <span class="brand-tagline">Catalogue</span>
+        </span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#catalogueNavbar"
+        aria-controls="catalogueNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="catalogueNavbar">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item mt-2 mt-lg-0">
+            <a class="btn btn-sm btn-gold rounded-pill px-3" href="login.html">
+              <i class="bi bi-person-lock me-1"></i>Staff Login
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== PAGE CONTENT ===== -->
+  <main class="page-main">
+    <div class="container">
+
+      <!-- ===== HERO ===== -->
+      <section class="catalogue-hero fade-in-up">
+        <h1>Discover your signature scent</h1>
+        <p>Hand-picked perfumes, ouds and florals - order yours on WhatsApp today.</p>
+      </section>
+
+      <!-- ===== SEARCH AND CATEGORY FILTER ===== -->
+      <div class="card-soft mb-4">
+        <div class="card-body">
+          <div class="row g-2 align-items-end">
+            <div class="col-12 col-md-7">
+              <label class="form-label" for="catalogueSearchInput">Search</label>
+              <div class="input-group">
+                <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+                <input type="search" class="form-control" id="catalogueSearchInput" placeholder="Name or brand" />
+              </div>
+            </div>
+            <div class="col-8 col-md-3">
+              <label class="form-label" for="catalogueCategorySelect">Category</label>
+              <select class="form-select" id="catalogueCategorySelect">
+                <option value="">All categories</option>
+                <option value="Men">Men</option>
+                <option value="Women">Women</option>
+                <option value="Unisex">Unisex</option>
+                <option value="Oud">Oud</option>
+                <option value="Fresh">Fresh</option>
+                <option value="Floral">Floral</option>
+              </select>
+            </div>
+            <div class="col-4 col-md-2 d-grid">
+              <button type="button" class="btn btn-outline-plum" id="catalogueClearButton">
+                <i class="bi bi-x-circle me-1"></i>Clear
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== RESULT COUNT ===== -->
+      <p class="text-muted-soft small mb-3" id="catalogueCount"></p>
+
+      <!-- ===== PRODUCT CARDS ===== -->
+      <div class="row g-4" id="catalogueGrid">
+        <!-- catalogue.js fills this with a loading spinner, cards or an empty state. -->
+      </div>
+
+      <!-- ===== PAGINATION ===== -->
+      <nav class="mt-4" aria-label="Catalogue pages" id="paginationContainer"></nav>
+
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="app-footer">
+    <div class="container d-flex flex-wrap justify-content-between gap-2">
+      <span><i class="bi bi-flower1 footer-gold me-1"></i>Cathy Luxe Collections</span>
+      <span>Message us on WhatsApp to place an order.</span>
+    </div>
+  </footer>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script src="vendor/bootstrap.bundle.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/catalogue.js"></script>
+</body>
+</html>

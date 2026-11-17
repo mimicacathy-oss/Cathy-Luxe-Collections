@@ -1,0 +1,729 @@
+/* ==========================================================================
+   File name : public/css/style.css
+   Purpose   : The "luxury perfume" theme for the whole application.
+               Bootstrap 5 supplies the grid and the components (buttons,
+               modals, tables, toasts); this file only adds the colours,
+               the fonts, the rounded cards and the small animations that
+               give the shop its own character.
+   Connects  : Loaded by every HTML page, AFTER the Bootstrap CDN stylesheet
+               so that these rules win where they overlap.
+   ========================================================================== */
+
+/* ===== Theme tokens ===== */
+:root {
+  /* Deep plum/charcoal used for the navbar, headings and footer. */
+  --colour-plum: #2a1f2d;
+  --colour-plum-dark: #1f1a24;
+  --colour-plum-soft: #3d2f42;
+
+  /* Gold accent used for primary buttons, badges and highlights. */
+  --colour-gold: #c9a24d;
+  --colour-gold-dark: #a8853a;
+  --colour-gold-soft: #e6d3a3;
+
+  /* Soft cream page background and pure white cards. */
+  --colour-cream: #faf6f0;
+  --colour-card: #ffffff;
+
+  /* Shared text colours. */
+  --colour-text: #2f2a33;
+  --colour-muted: #7b7285;
+
+  /* Soft shadow used by every card so the layout feels layered, not flat. */
+  --shadow-card: 0 6px 24px rgba(42, 31, 45, 0.08);
+  --shadow-hover: 0 14px 34px rgba(42, 31, 45, 0.16);
+
+  /* One radius value keeps every rounded corner consistent. */
+  --radius-card: 18px;
+}
+
+/* ===== Layout ===== */
+body {
+  background-color: var(--colour-cream);
+  color: var(--colour-text);
+  font-family: 'Poppins', -apple-system, 'Segoe UI', sans-serif;
+  font-size: 0.95rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* The main area grows so the footer stays at the bottom on short pages. */
+.page-main {
+  flex: 1 0 auto;
+  padding-top: 1.75rem;
+  padding-bottom: 3rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+.card-title,
+.brand-name {
+  font-family: 'Playfair Display', Georgia, serif;
+  color: var(--colour-plum);
+  letter-spacing: 0.2px;
+}
+
+.page-title {
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.page-subtitle {
+  color: var(--colour-muted);
+  font-size: 0.9rem;
+  margin-bottom: 0;
+}
+
+.text-muted-soft {
+  color: var(--colour-muted);
+}
+
+/* ===== Navbar ===== */
+.app-navbar {
+  background-color: var(--colour-plum);
+  box-shadow: 0 4px 18px rgba(31, 26, 36, 0.28);
+}
+
+.app-navbar .navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #ffffff;
+}
+
+.app-navbar .brand-name {
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.app-navbar .brand-tagline {
+  color: var(--colour-gold-soft);
+  font-size: 0.68rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* The little gold perfume icon next to the brand name. */
+.brand-mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--colour-gold) 0%, var(--colour-gold-dark) 100%);
+  color: var(--colour-plum-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+}
+
+.app-navbar .nav-link {
+  color: rgba(255, 255, 255, 0.78);
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.app-navbar .nav-link:hover,
+.app-navbar .nav-link:focus {
+  color: #ffffff;
+  background-color: var(--colour-plum-soft);
+}
+
+/* The current page is highlighted in gold so staff always know where they are. */
+.app-navbar .nav-link.active {
+  color: var(--colour-plum-dark);
+  background-color: var(--colour-gold);
+}
+
+.app-navbar .navbar-toggler {
+  border-color: rgba(201, 162, 77, 0.6);
+}
+
+.app-navbar .navbar-toggler:focus {
+  box-shadow: 0 0 0 0.2rem rgba(201, 162, 77, 0.35);
+}
+
+.app-navbar .user-chip {
+  color: var(--colour-gold-soft);
+  font-size: 0.8rem;
+}
+
+/* ===== Cards ===== */
+.card-soft {
+  background-color: var(--colour-card);
+  border: 1px solid rgba(42, 31, 45, 0.06);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.card-soft .card-header {
+  background-color: transparent;
+  border-bottom: 1px solid rgba(42, 31, 45, 0.07);
+  font-weight: 600;
+  color: var(--colour-plum);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.05rem;
+  border-top-left-radius: var(--radius-card);
+  border-top-right-radius: var(--radius-card);
+}
+
+/* ===== Stat cards (dashboard) ===== */
+.stat-card {
+  background-color: var(--colour-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 1.25rem 1.35rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  height: 100%;
+  border-left: 4px solid var(--colour-gold);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+}
+
+.stat-card .stat-icon {
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.stat-card .stat-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--colour-muted);
+  margin-bottom: 0.15rem;
+}
+
+.stat-card .stat-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--colour-plum);
+  line-height: 1.15;
+  word-break: break-word;
+}
+
+.stat-icon--gold {
+  background-color: rgba(201, 162, 77, 0.16);
+  color: var(--colour-gold-dark);
+}
+
+.stat-icon--plum {
+  background-color: rgba(42, 31, 45, 0.1);
+  color: var(--colour-plum);
+}
+
+.stat-icon--green {
+  background-color: rgba(25, 135, 84, 0.14);
+  color: #157347;
+}
+
+.stat-icon--red {
+  background-color: rgba(220, 53, 69, 0.14);
+  color: #bb2d3b;
+}
+
+/* A gentle staggered entrance for the dashboard cards. */
+.fade-in-up {
+  animation: fadeInUp 0.5s ease both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.delay-1 {
+  animation-delay: 0.05s;
+}
+
+.delay-2 {
+  animation-delay: 0.12s;
+}
+
+.delay-3 {
+  animation-delay: 0.19s;
+}
+
+.delay-4 {
+  animation-delay: 0.26s;
+}
+
+/* ===== Buttons ===== */
+.btn-gold {
+  background-color: var(--colour-gold);
+  border-color: var(--colour-gold);
+  color: #ffffff;
+  font-weight: 500;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.btn-gold:hover,
+.btn-gold:focus {
+  background-color: var(--colour-gold-dark);
+  border-color: var(--colour-gold-dark);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.btn-plum {
+  background-color: var(--colour-plum);
+  border-color: var(--colour-plum);
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.btn-plum:hover,
+.btn-plum:focus {
+  background-color: var(--colour-plum-dark);
+  border-color: var(--colour-plum-dark);
+  color: #ffffff;
+}
+
+.btn-outline-plum {
+  border-color: var(--colour-plum);
+  color: var(--colour-plum);
+}
+
+.btn-outline-plum:hover,
+.btn-outline-plum:focus {
+  background-color: var(--colour-plum);
+  color: #ffffff;
+}
+
+/* ===== Product cards ===== */
+.product-card {
+  background-color: var(--colour-card);
+  border: 1px solid rgba(42, 31, 45, 0.06);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.product-image-wrapper {
+  position: relative;
+  height: 190px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f2ebdf 0%, #e6dccb 100%);
+}
+
+.product-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.product-card:hover .product-image-wrapper img {
+  transform: scale(1.06);
+}
+
+/* The category label sits on top of the photo. */
+.product-category-tag {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  background-color: rgba(42, 31, 45, 0.85);
+  color: var(--colour-gold-soft);
+  font-size: 0.68rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border-radius: 30px;
+}
+
+.product-body {
+  padding: 1rem 1.1rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.product-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.15rem;
+}
+
+.product-brand {
+  font-size: 0.82rem;
+  color: var(--colour-muted);
+  margin-bottom: 0.5rem;
+}
+
+.product-price {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--colour-gold-dark);
+}
+
+.product-notes {
+  font-size: 0.78rem;
+  color: var(--colour-muted);
+  min-height: 2rem;
+}
+
+.product-actions {
+  margin-top: auto;
+  padding-top: 0.85rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* ===== Badges ===== */
+.badge-stock {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.3rem 0.65rem;
+  border-radius: 30px;
+}
+
+.badge-stock--in {
+  background-color: rgba(25, 135, 84, 0.14);
+  color: #157347;
+}
+
+.badge-stock--low {
+  background-color: rgba(255, 153, 0, 0.18);
+  color: #b26a00;
+}
+
+.badge-stock--out {
+  background-color: rgba(220, 53, 69, 0.14);
+  color: #bb2d3b;
+}
+
+.badge-status--completed {
+  background-color: rgba(25, 135, 84, 0.14);
+  color: #157347;
+  font-weight: 600;
+  padding: 0.35rem 0.7rem;
+  border-radius: 30px;
+  font-size: 0.72rem;
+}
+
+.badge-status--cancelled {
+  background-color: rgba(220, 53, 69, 0.14);
+  color: #bb2d3b;
+  font-weight: 600;
+  padding: 0.35rem 0.7rem;
+  border-radius: 30px;
+  font-size: 0.72rem;
+}
+
+/* ===== Tables ===== */
+.table-luxury {
+  margin-bottom: 0;
+}
+
+.table-luxury thead th {
+  background-color: rgba(42, 31, 45, 0.04);
+  color: var(--colour-plum);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid rgba(42, 31, 45, 0.1);
+  white-space: nowrap;
+}
+
+.table-luxury tbody td {
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(42, 31, 45, 0.05);
+  font-size: 0.88rem;
+}
+
+.table-luxury tbody tr:hover {
+  background-color: rgba(201, 162, 77, 0.06);
+}
+
+/* ===== Forms and modals ===== */
+.form-label {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--colour-plum);
+  margin-bottom: 0.3rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--colour-gold);
+  box-shadow: 0 0 0 0.2rem rgba(201, 162, 77, 0.22);
+}
+
+.modal-header {
+  background-color: var(--colour-plum);
+  color: #ffffff;
+  border-top-left-radius: var(--radius-card);
+  border-top-right-radius: var(--radius-card);
+}
+
+.modal-header .modal-title {
+  color: #ffffff;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.modal-header .btn-close {
+  filter: invert(1) grayscale(1) brightness(2);
+}
+
+.modal-content {
+  border-radius: var(--radius-card);
+  border: none;
+  box-shadow: var(--shadow-hover);
+}
+
+/* ===== Loading and empty states ===== */
+.loading-state,
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--colour-muted);
+}
+
+.empty-state i {
+  font-size: 2.6rem;
+  color: var(--colour-gold);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+/* ===== Toast container ===== */
+.app-toast-container {
+  z-index: 1090;
+}
+
+.app-toast {
+  border: none;
+  border-radius: 14px;
+  box-shadow: var(--shadow-hover);
+  overflow: hidden;
+}
+
+/* ===== Login page ===== */
+.login-page {
+  background: linear-gradient(150deg, var(--colour-plum-dark) 0%, var(--colour-plum) 55%, #4a3350 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.login-card {
+  background-color: rgba(255, 255, 255, 0.97);
+  border-radius: 22px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+  padding: 2.25rem 2rem;
+  width: 100%;
+  max-width: 420px;
+}
+
+.login-card .login-mark {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  background: linear-gradient(135deg, var(--colour-gold) 0%, var(--colour-gold-dark) 100%);
+  color: var(--colour-plum-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.9rem;
+}
+
+.login-hint {
+  font-size: 0.78rem;
+  color: var(--colour-muted);
+  background-color: rgba(201, 162, 77, 0.1);
+  border-radius: 12px;
+  padding: 0.6rem 0.8rem;
+}
+
+/* ===== Catalogue hero ===== */
+.catalogue-hero {
+  background: linear-gradient(135deg, var(--colour-plum-dark) 0%, var(--colour-plum) 60%, #4a3350 100%);
+  color: #ffffff;
+  border-radius: var(--radius-card);
+  padding: 3rem 1.5rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* A soft gold glow in the corner gives the hero some depth. */
+.catalogue-hero::after {
+  content: '';
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201, 162, 77, 0.35) 0%, rgba(201, 162, 77, 0) 70%);
+  top: -120px;
+  right: -80px;
+}
+
+.catalogue-hero h1 {
+  color: #ffffff;
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.catalogue-hero p {
+  color: var(--colour-gold-soft);
+  margin-bottom: 0;
+}
+
+/* ===== Receipt (print only) ===== */
+.receipt-sheet {
+  background-color: #ffffff;
+  color: #000000;
+  font-family: 'Poppins', sans-serif;
+  padding: 1.5rem;
+  border-radius: 12px;
+}
+
+.receipt-sheet .receipt-header {
+  text-align: center;
+  border-bottom: 1px dashed #999999;
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.receipt-sheet .receipt-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.3rem;
+  margin-bottom: 0.15rem;
+}
+
+.receipt-sheet table {
+  width: 100%;
+  font-size: 0.85rem;
+}
+
+.receipt-sheet th,
+.receipt-sheet td {
+  padding: 0.35rem 0.25rem;
+  text-align: left;
+}
+
+.receipt-sheet th:last-child,
+.receipt-sheet td:last-child {
+  text-align: right;
+}
+
+.receipt-total-row {
+  font-weight: 700;
+  border-top: 1px solid #000000;
+}
+
+/* ===== Footer ===== */
+.app-footer {
+  background-color: var(--colour-plum-dark);
+  color: rgba(255, 255, 255, 0.65);
+  padding: 1.1rem 0;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.app-footer .footer-gold {
+  color: var(--colour-gold-soft);
+}
+
+/* ===== Responsive adjustments ===== */
+
+/* Phones (about 360px and upwards). */
+@media (max-width: 575.98px) {
+  .page-title {
+    font-size: 1.4rem;
+  }
+
+  .stat-card {
+    padding: 1rem;
+  }
+
+  .stat-card .stat-value {
+    font-size: 1.15rem;
+  }
+
+  .catalogue-hero {
+    padding: 2rem 1rem;
+  }
+
+  .catalogue-hero h1 {
+    font-size: 1.6rem;
+  }
+
+  .product-image-wrapper {
+    height: 210px;
+  }
+
+  .app-navbar .nav-link {
+    padding: 0.6rem 0.9rem;
+  }
+}
+
+/* Tablets. */
+@media (min-width: 576px) and (max-width: 991.98px) {
+  .product-image-wrapper {
+    height: 175px;
+  }
+}
+
+/* ===== Print styles ===== */
+@media print {
+  /* Hide everything on the page ... */
+  body * {
+    visibility: hidden;
+  }
+
+  /* ... then show only the receipt and everything inside it. */
+  #printArea,
+  #printArea * {
+    visibility: visible;
+  }
+
+  #printArea {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  .receipt-sheet {
+    box-shadow: none;
+    border-radius: 0;
+  }
+}

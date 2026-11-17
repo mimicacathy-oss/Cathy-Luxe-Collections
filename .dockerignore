@@ -1,0 +1,32 @@
+# Dependencies
+node_modules
+
+# Environment files
+.env
+
+# Git
+.git
+.gitignore
+
+# Debug and temporary files
+*.log
+*.txt*
+_*.txt
+_*.ps1
+_*.js
+
+# Documentation
+README.md
+CATHY LUXE COLLECTIONS doc.docx
+
+# IDE
+.vscode
+.idea
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Uploads (will be mounted as volume)
+public/uploads/*
+!public/uploads/.gitkeep

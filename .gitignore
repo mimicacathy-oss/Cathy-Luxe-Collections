@@ -1,0 +1,22 @@
+# Dependencies installed from package.json
+node_modules/
+
+# Local environment file that holds secrets (JWT secret, database URI)
+.env
+
+# Uploaded product images
+public/uploads/
+
+# Editor / operating system noise
+.DS_Store
+Thumbs.db
+npm-debug.log*
+
+# Downloaded tooling: MongoDB server, Node.js, database files
+.tools/
+
+# Temporary setup/debug scripts and captured logs (repo root only)
+/_*.txt
+/_*.ps1
+/_*.js
+*.log

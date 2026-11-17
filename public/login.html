@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<!--
+  File name : public/login.html
+  Purpose   : Staff login page. The only page (besides the public catalogue)
+              that does not need a token. On success the token is stored in
+              localStorage and the browser is sent to the dashboard.
+  Connects  : Loads css/style.css, js/api.js, js/auth.js and js/ui.js.
+              It submits to POST /api/auth/login.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Staff Login | Cathy Luxe Collections</title>
+
+  <!-- ===== Stylesheets (Bootstrap + Bootstrap Icons + Google Fonts + theme) ===== -->
+  <link href="vendor/bootstrap.min.css" rel="stylesheet" />
+  <link href="vendor/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="vendor/fonts.css" rel="stylesheet" />
+  <link href="css/style.css" rel="stylesheet" />
+</head>
+<body class="login-page">
+
+  <!-- ===== LOGIN CARD ===== -->
+  <main class="login-card fade-in-up">
+    <div class="text-center">
+      <div class="login-mark">
+        <i class="bi bi-flower1"></i>
+      </div>
+      <h1 class="page-title h3 mb-1">Cathy Luxe Collections</h1>
+      <p class="page-subtitle mb-4">Sign in to manage perfumes, customers and sales.</p>
+    </div>
+
+    <!-- ===== LOGIN FORM ===== -->
+    <form id="loginForm" novalidate>
+      <div class="mb-3">
+        <label class="form-label" for="loginEmail">Email address</label>
+        <div class="input-group">
+          <span class="input-group-text bg-white"><i class="bi bi-envelope"></i></span>
+          <input
+            type="email"
+            class="form-control"
+            id="loginEmail"
+            name="email"
+            placeholder="admin@perfume.com"
+            autocomplete="username"
+            required
+          />
+          <div class="invalid-feedback">Please enter your email address.</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label" for="loginPassword">Password</label>
+        <div class="input-group">
+          <span class="input-group-text bg-white"><i class="bi bi-lock"></i></span>
+          <input
+            type="password"
+            class="form-control"
+            id="loginPassword"
+            name="password"
+            placeholder="Your password"
+            autocomplete="current-password"
+            required
+          />
+          <div class="invalid-feedback">Please enter your password.</div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-gold w-100 rounded-pill py-2" id="loginSubmitButton">
+        <i class="bi bi-box-arrow-in-right me-1"></i>Sign in
+      </button>
+    </form>
+
+    <!-- ===== DEFAULT CREDENTIALS HINT ===== -->
+    <div class="login-hint mt-4">
+      <i class="bi bi-info-circle me-1"></i>
+      Default account after seeding: <strong>admin@perfume.com</strong> / <strong>admin123</strong>
+    </div>
+
+    <p class="text-center mt-3 mb-0">
+      <a href="catalogue.html" class="text-decoration-none text-muted-soft">
+        <i class="bi bi-shop me-1"></i>Browse the public catalogue
+      </a>
+    </p>
+  </main>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script src="vendor/bootstrap.bundle.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/ui.js"></script>
+  <script>
+    /**
+     * Wire up the login form: validate the fields, call the API and store the
+     * session on success. Kept inline because this is the only page that needs it.
+     */
+    function handleLoginSubmit(event) {
+      event.preventDefault();
+      loginUser();
+    }
+
+    /**
+     * Read the form values, call POST /api/auth/login and react to the answer.
+     *
+     * @returns {Promise<void>} Resolves when the request finished.
+     */
+    async function loginUser() {
+      let form = document.getElementById('loginForm');
+      let emailInput = document.getElementById('loginEmail');
+      let passwordInput = document.getElementById('loginPassword');
+      let submitButton = document.getElementById('loginSubmitButton');
+
+      // Step 1: Let the browser check the built-in rules (required, type=email)
+      // and show the Bootstrap invalid styles when something is missing.
+      form.classList.add('was-validated');
+
+      if (form.checkValidity() === false) {
+        return;
+      }
+
+      // Step 2: Stop double submissions while the request is in flight.
+      submitButton.disabled = true;
+      submitButton.innerHTML =
+        '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Signing in...';
+
+      try {
+        // Step 3: Ask the server for a token.
+        let response = await api.post('/auth/login', {
+          email: emailInput.value,
+          password: passwordInput.value
+        });
+
+        // Step 4: Remember the session and go to the dashboard.
+        saveToken(response.token);
+        saveCurrentUser(response.user);
+        window.location.href = 'index.html';
+      } catch (error) {
+        // Step 5: Show the server's explanation and let the user try again.
+        showToast(error.message, 'error');
+        submitButton.disabled = false;
+        submitButton.innerHTML = '<i class="bi bi-box-arrow-in-right me-1"></i>Sign in';
+      }
+    }
+
+    // ===== Page start up =====
+    // A visitor who is already logged in has no reason to see this form again.
+    redirectToDashboardIfLoggedIn();
+    document.getElementById('loginForm').addEventListener('submit', handleLoginSubmit);
+  </script>
+</body>
+</html>
